@@ -1,0 +1,14 @@
+{% extends 'index.html' %}
+{% load crispy_forms_tags %}
+{% block content %}
+
+<center><h2 style="margin-top: 30px; margin-bottom: 30px">Update Student Details</h2></center>
+  <div class="container mt-5 mb-5 mr-5 ml-5">
+  <form method="POST">
+      {% csrf_token %}
+      {{ form | crispy}}    
+     <button class="btn btn-primary mt-3 mb-3">Update</button> 
+  </form>
+  </div>
+
+{% endblock content %}

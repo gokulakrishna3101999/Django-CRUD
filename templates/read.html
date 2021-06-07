@@ -1,0 +1,46 @@
+{% extends 'index.html' %}
+
+{% block content %}
+
+    <center><h2 style="margin-top: 30px; margin-bottom: 30px">Student List</h2></center>
+    <div class="container mt-3">
+      <table class="table">
+        <thead>
+          <tr>
+            <th scope="col">Name</th>
+            <th scope="col">Register Number</th>
+            <th scope="col">Department</th>
+            <th scope="col">Operation</th>
+          </tr>
+        </thead>
+        <tbody>
+        {% for stud in student %}
+          <tr>
+            <td>{{stud.name}}</td>
+            <td>{{stud.register_no}}</td>
+            <td>{{stud.department}}</td>
+            <td>
+               <a class="btn btn-success" href="{% url 'update' stud.id %}">Update</a>
+               <a class="delete btn btn-danger" href="{% url 'delete' stud.id %}" data-confirm="Are you sure to delete this item?">Delete</a>
+               {% comment %} {% url 'delete'%} {% endcomment %}
+            </td>
+          </tr>
+        {% endfor %}
+        </tbody>
+      </table>
+ </div>
+
+<script>
+  var deleteLinks = document.querySelectorAll('.delete');
+  for (var i = 0; i < deleteLinks.length; i++) {
+    deleteLinks[i].addEventListener('click', function(event) {
+       event.preventDefault();
+       var choice = confirm(this.getAttribute('data-confirm'));
+      if (choice) {
+        window.location.href = this.getAttribute('href');
+      }
+   });
+  }
+ </script>
+
+{% endblock content %}
